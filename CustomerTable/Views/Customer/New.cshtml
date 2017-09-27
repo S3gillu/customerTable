@@ -1,0 +1,105 @@
+﻿@model CustomerTable.ViewModels.NameCountryState
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><strong>User Profile</strong></h2>
+<style> body{margin-left:300px;}</style>
+@*<link href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>*@
+@using (Html.BeginForm("Save", "Customer"))
+{
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+       
+            @Html.LabelFor(m => m.Customer.Name)
+        <div class="col-md-10" style="width:300px">
+            @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+            </div>
+        </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Email)
+        <div class="col-md-10" style="width:300px">
+            @Html.TextBoxFor(m => m.Customer.Email, new { @class = "form-control" })
+        </div>
+        </div>
+
+    @* <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+                </script>
+            </div>
+        </div>*@
+
+   <div class="form-group">
+
+        @Html.LabelFor(m => m.Customer.Birthdate)
+        <div class="col-md-10" style="width:300px">
+            @Html.EditorFor(m => m.Customer.Birthdate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            </div>
+        </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.CountryName)
+        <div class="col-md-10" style="width:300px">
+            @Html.DropDownListFor(m => m.Customer.CountryName, 
+           new SelectList(Model.Countries, "CountryId", "CountryName"), "Select Country Name", 
+           new { @class = "form-control" })
+        </div>
+        </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.StateName)
+        <div class="col-md-10" style="width:300px">
+            @Html.DropDownListFor(m => m.Customer.StateName,
+           new SelectList(Model.States, "StateId", "StateName"), "Select State Name",
+           new { @class = "form-control" })
+        </div>
+        </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Address)
+        <div class="col-md-10" style="width:300px">
+            @Html.TextAreaFor(m => m.Customer.Address, new { @class = "form-control" })
+        </div>
+        </div>
+
+   
+    </div>
+    <div class="form-group">
+        <input type="Reset" value=" Reset  " class="btn btn-danger" /> &nbsp;
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+    <div >
+        @Html.ActionLink("Create New","Index")
+    </div>
+
+    @Html.HiddenFor(m => m.Customer.Id)
+    @Html.AntiForgeryToken()
+   
+
+
+}
+@*<script type="text/javascript">
+	$(function(){
+		$('.datepicker').datepicker({showAnim: "fadeIn"});
+	})
+</script>*@
